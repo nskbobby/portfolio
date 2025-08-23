@@ -6,328 +6,713 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Krishna K. | Full-Stack Developer Portfolio</title>
   
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- AOS Animations -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    // Wait for Tailwind to load before configuring
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof tailwind !== 'undefined') {
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                'inter': ['Inter', 'sans-serif'],
+                'space': ['Space Grotesk', 'sans-serif'],
+              },
+              colors: {
+                'dark-bg': '#0a0a0a',
+                'card-bg': '#111111',
+                'accent': '#00f5ff',
+                'accent-purple': '#8b5cf6',
+                'text-gray': '#a1a1aa',
+              },
+              animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'glow': 'glow 2s ease-in-out infinite alternate',
+                'slide-up': 'slideUp 0.5s ease-out',
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+  
   <style>
+    /* Custom fonts */
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #121212; /* Dark background */
-      color: #f4f4f4; /* Light text */
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar {
-      background-color: #2c3e50; /* Dark blue for navbar */
-      padding: 1rem 0;
+      font-family: 'Inter', sans-serif;
     }
     
-    .navbar-brand {
-      color: #e74c3c; /* Red accent color */
-      font-weight: 600;
-      text-transform: uppercase;
+    .font-space {
+      font-family: 'Space Grotesk', sans-serif;
     }
     
-    .navbar a {
-      color: #ecf0f1;
-      font-weight: 500;
+    /* Custom colors */
+    .bg-dark-bg { background-color: #0a0a0a; }
+    .bg-card-bg { background-color: #111111; }
+    .text-accent { color: #00f5ff; }
+    .bg-accent { background-color: #00f5ff; }
+    .text-accent-purple { color: #8b5cf6; }
+    .bg-accent-purple { background-color: #8b5cf6; }
+    .text-text-gray { color: #a1a1aa; }
+    .border-accent { border-color: #00f5ff; }
+    
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
-
-    .navbar a:hover {
-      color: #e74c3c;
-      text-decoration: underline;
+    
+    @keyframes glow {
+      from { box-shadow: 0 0 20px #00f5ff40; }
+      to { box-shadow: 0 0 40px #00f5ff60, 0 0 60px #00f5ff40; }
     }
-
-    .container {
-      margin-top: 30px;
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .section-title {
-      
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: #e74c3c;
-      text-transform: uppercase;
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
     }
-
-    .about-section, .projects-section {
-      background-color: #1e2a3a; /* Dark blue-gray for sections */
-      padding: 3rem 2rem;
-      margin-bottom: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    
+    .animate-glow {
+      animation: glow 2s ease-in-out infinite alternate;
     }
-
-    .about-section p, .project-item p {
-      line-height: 1.8;
-      font-size: 1.1rem;
+    
+    .animate-slide-up {
+      animation: slideUp 0.5s ease-out;
     }
-
-    .project-item {
-      background-color: #34495e; /* Lighter dark gray */
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .project-item h3 {
-      font-size: 1.8rem;
-      color: #e74c3c; /* Red accent */
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #e74c3c 0%, #f39c12 100%); /* Gradient effect */
+    
+    /* Gradient text effect */
+    .gradient-text {
+      background: linear-gradient(135deg, #00f5ff 0%, #8b5cf6 100%);
       -webkit-background-clip: text;
-      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    .project-item ul {
-      padding-left: 20px;
+    
+    /* Card hover effects */
+    .card-hover {
+      transition: all 0.3s ease;
     }
-
-    .footer {
-      background-color: #2c3e50;
-      padding: 20px 0;
-      text-align: center;
-      color: white;
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 245, 255, 0.25);
     }
-
-    a {
-      color: #e74c3c;
-      text-decoration: none;
+    
+    /* Glass effect */
+    .glass-effect {
+      backdrop-filter: blur(10px);
+      background: rgba(17, 17, 17, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-
-    a:hover {
-      text-decoration: underline;
+    
+    /* Smooth scrolling */
+    .scroll-smooth {
+      scroll-behavior: smooth;
     }
-
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 2rem;
-      }
-      .project-item {
-        padding: 15px;
-      }
+    
+    /* Gradient backgrounds */
+    .bg-gradient-accent {
+      background: linear-gradient(135deg, #00f5ff 0%, #8b5cf6 100%);
+    }
+    
+    .bg-gradient-accent-hover:hover {
+      background: linear-gradient(135deg, #8b5cf6 0%, #00f5ff 100%);
     }
   </style>
 </head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Krishna K.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About Me</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#projects">Projects</a>
-          </li>
-        </ul>
+<body class="bg-dark-bg text-white font-inter scroll-smooth">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-effect">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold gradient-text font-space">Krishna K.</h1>
+        </div>
+        
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="text-text-gray hover:text-accent transition-colors duration-300">About</a>
+          <a href="#projects" class="text-text-gray hover:text-accent transition-colors duration-300">Projects</a>
+          <a href="#contact" class="text-text-gray hover:text-accent transition-colors duration-300">Contact</a>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-btn" class="text-white">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden glass-effect">
+      <div class="px-4 py-4 space-y-4">
+        <a href="#about" class="block text-text-gray hover:text-accent transition-colors duration-300">About</a>
+        <a href="#projects" class="block text-text-gray hover:text-accent transition-colors duration-300">Projects</a>
+        <a href="#contact" class="block text-text-gray hover:text-accent transition-colors duration-300">Contact</a>
       </div>
     </div>
   </nav>
 
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-accent-purple/20 to-accent/20 animate-pulse"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center">
+        <div class="animate-float mb-8">
+          <div class="w-32 h-32 mx-auto bg-gradient-to-br from-accent to-accent-purple rounded-full animate-glow flex items-center justify-center">
+            <i class="fas fa-code text-4xl text-white"></i>
+          </div>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold font-space mb-6">
+          Hello, I'm <span class="gradient-text">Krishna K</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-text-gray mb-8 max-w-3xl mx-auto leading-relaxed">
+          A Full-Stack Developer passionate about building robust applications that solve real-world problems
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="#projects" class="bg-gradient-to-r from-accent to-accent-purple px-8 py-4 rounded-full text-black font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            View My Work
+          </a>
+          <a href="#contact" class="border border-accent px-8 py-4 rounded-full text-accent hover:bg-accent hover:text-black transition-all duration-300">
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About Section -->
-  <section class="about-section" id="about" data-aos="fade-up">
-    <div class="container">
+  <section id="about" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text font-space mb-4">About Me</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+      </div>
       
-      <p class="display-4"> Hello, I’m Krishna K </p>
-        <p> A Full-Stack Developer passionate about building robust applications that solve real-world problems.</p>
-      <p>I am a dedicated software developer with Years of hands-on experience in full-stack development. My expertise lies in building scalable, high-performance web applications and APIs using technologies like Node.js, Express, React, java, Springboot and PostgreSQL, with cloud deployments on AWS and Render. I take a user-centered, performance-driven approach to development, crafting applications that are functional, efficient, and responsive.</p>
-      <p>Throughout my career, I’ve contributed across the SDLC on a variety of projects, from creating dynamic front-end interfaces to developing robust back-end services, always with a focus on secure, reliable solutions. My interests also extend to automation, data-driven applications, and exploring emerging technologies like machine learning and artificial intelligence. This portfolio showcases my versatility through projects that merge creativity with technical expertise, effectively solving real-world challenges.</p>
-      <p>Feel free to browse my work, and don’t hesitate to reach out if you’d like to discuss any projects or learn more about my approach to development.</p>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <p class="text-lg text-text-gray leading-relaxed">
+            I am a dedicated software developer with years of hands-on experience in full-stack development. My expertise lies in building scalable, high-performance web applications and APIs using technologies like Node.js, Express, React, Next.js, Java, Spring Boot, .NET, Blazor, C#, Python, Django, and PostgreSQL, with cloud deployments on AWS, Vercel, and Render.
+          </p>
+          
+          <p class="text-lg text-text-gray leading-relaxed">
+            I take a user-centered, performance-driven approach to development, crafting applications that are functional, efficient, and responsive. Throughout my career, I've contributed across the SDLC on a variety of projects, from creating dynamic front-end interfaces to developing robust back-end services.
+          </p>
+          
+          <p class="text-lg text-text-gray leading-relaxed">
+            My interests also extend to automation, data-driven applications, and exploring emerging technologies like machine learning and artificial intelligence.
+          </p>
+          
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <i class="fab fa-react text-3xl text-accent mb-2"></i>
+              <p class="text-sm">React</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <i class="fab fa-node-js text-3xl text-accent mb-2"></i>
+              <p class="text-sm">Node.js</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <svg class="w-8 h-8 mx-auto mb-2 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm-.84 4.67c.13 0 .26.01.39.03 2.86.31 5.11 2.56 5.42 5.42.02.13.03.26.03.39 0 3.12-2.53 5.65-5.65 5.65s-5.65-2.53-5.65-5.65c0-3.12 2.53-5.65 5.65-5.65.27 0 .54.02.81.05z"/>
+              </svg>
+              <p class="text-sm">Next.js</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <i class="fab fa-python text-3xl text-accent mb-2"></i>
+              <p class="text-sm">Python</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <svg class="w-8 h-8 mx-auto mb-2 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C8.48 0 5.55 2.93 5.55 6.45s2.93 6.45 6.45 6.45 6.45-2.93 6.45-6.45S15.52 0 12 0zm0 10.9c-2.45 0-4.45-2-4.45-4.45S9.55 2 12 2s4.45 2 4.45 4.45-2 4.45-4.45 4.45z"/>
+                <path d="M12 14.1c-3.9 0-7.1 3.2-7.1 7.1h14.2c0-3.9-3.2-7.1-7.1-7.1z"/>
+              </svg>
+              <p class="text-sm">C#</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <svg class="w-8 h-8 mx-auto mb-2 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.93 8.2l-6.85 6.85c-.78.78-2.05.78-2.83 0L4.87 11.67c-.78-.78-.78-2.05 0-2.83.78-.78 2.05-.78 2.83 0l2.55 2.55 5.68-5.68c.78-.78 2.05-.78 2.83 0 .78.78.78 2.05 0 2.83z"/>
+              </svg>
+              <p class="text-sm">.NET</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <svg class="w-8 h-8 mx-auto mb-2 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.834 8.101a13.912 13.912 0 0 1-13.643.06 15.955 15.955 0 0 1-8.168-12.12c3.647.698 7.086 2.148 10.016 4.226a11.267 11.267 0 0 0 8.543 2.021c1.086.242 2.818.641 3.252 5.813Z"/>
+              </svg>
+              <p class="text-sm">Blazor</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <i class="fab fa-java text-3xl text-accent mb-2"></i>
+              <p class="text-sm">Java</p>
+            </div>
+            <div class="text-center p-4 glass-effect rounded-lg">
+              <i class="fab fa-aws text-3xl text-accent mb-2"></i>
+              <p class="text-sm">AWS</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <div class="glass-effect p-8 rounded-2xl">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-text-gray">Full-Stack Development</span>
+                <span class="text-accent">95%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-accent to-accent-purple h-2 rounded-full" style="width: 95%"></div>
+              </div>
+              
+              <div class="flex justify-between items-center">
+                <span class="text-text-gray">API Development</span>
+                <span class="text-accent">90%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-accent to-accent-purple h-2 rounded-full" style="width: 90%"></div>
+              </div>
+              
+              <div class="flex justify-between items-center">
+                <span class="text-text-gray">Cloud Deployment</span>
+                <span class="text-accent">85%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-accent to-accent-purple h-2 rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section class="projects-section" id="projects" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title">Projects</h2>
-
-<!-- Pet Dog Finder API Project -->
-<div class="project-item" data-aos="fade-up" data-aos-delay="100">
-  <h3>Pet Dog Finder API</h3>
-  <p>An interactive API platform that allows users to search for dog breeds, view details, and see images.</p>
-  
-  <p><strong>Key Features:</strong></p>
-  <ul>
-    <li>Breed Search: Users can search for different dog breeds and view related images.</li>
-    <li>Real-Time Data: Fetches data from Dog CEO's API, providing breed-specific images and information.</li>
-    <li>Responsive UI: Built with React for smooth and dynamic user experience.</li>
-  </ul>
-  
-  <p><strong>Technical Stack:</strong> React.js, Axios, CSS, and Dog CEO API.</p>
-  
-  <p><strong>Deployment:</strong> Hosted on Render for live access.</p>
-  
-  <p>
-    <a href="https://pet-dog-finder.onrender.com" 
-       onclick="alert('Please note, this application might take a minute to load.');">
-       Pet Dog Finder Live
-    </a>
-  </p>
-</div>
+  <section id="projects" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text font-space mb-4">Featured Projects</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+      </div>
       
-      <!-- Chariot API Project -->
-      <div class="project-item" data-aos="fade-up" data-aos-delay="100">
-        <h3>Chariot API</h3>
-        <p>A single-integration API platform enabling efficient data aggregation and simplified access for businesses and developers.</p>
-        <p><strong>Key Features:</strong></p>
-        <ul>
-          <li>Basic Authentication: Each user receives a unique token for secure access.</li>
-          <li>Real-Time Data Aggregation: Consumes data from various API sources, returning information efficiently to clients.</li>
-          <li>Scalability: Hosted on AWS with a highly available setup, optimized for high-traffic environments.</li>
-        </ul>
-        <p><strong>Technical Stack:</strong> Node.js, Express.js, PostgreSQL, AWS (EC2, Lambda, RDS, S3).</p>
-        <p><strong>Deployment:</strong> Hosted on Render for live access.</p>
-        <p><a href="https://api-project-chariot.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">Chariot API Live </a></p>
-      </div>
-
-      <!-- Friendly Blogger Application -->
-      <div class="project-item" data-aos="fade-up" data-aos-delay="200">
-        <h3>Friendly Blogger Application</h3>
-        <p>A lightweight blogging platform for creating, editing, and sharing posts in a secure, user-friendly environment.</p>
-        <p><strong>Key Features:</strong></p>
-        <ul>
-          <li>Basic Authentication: Provides secure login and user session management.</li>
-          <li>Responsive Design: Built with HTML, CSS, and Bootstrap for a mobile-friendly interface.</li>
-          <li>Dynamic Rendering: EJS templates offer real-time content updates and an interactive user experience.</li>
-        </ul>
-        <p><strong>Technical Stack:</strong> Node.js, Express, HTML, CSS, EJS, Bootstrap.</p>
-        <p><strong>Deployment:</strong> Live on Render, showcasing a responsive and accessible interface.</p>
-        <p><a href="https://friendlyblogger.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">Friendly Blogger Live</a></p>
-      </div>
-
-      <!-- AuthWizard Application -->
-<div class="project-item" data-aos="fade-up" data-aos-delay="200">
-  <h3>AuthWizard Authentication Platform</h3>
-  <p>A powerful and easy-to-integrate authentication solution for secure user management, including login, registration, and session handling.</p>
-  <p><strong>Key Features:</strong></p>
-  <ul>
-    <li>OAuth 2.0 & OpenID Connect: Seamless integration with popular identity providers like Google, GitHub, and Facebook.</li>
-    <li>Secure JWT Authentication: Provides stateless and secure token-based authentication for your application.</li>
-     <li>Customizable Authentication UI: Tailor the login, signup, and password reset screens to match your app’s branding.</li>
-  </ul>
-  <p><strong>Technical Stack:</strong> Node.js, Express, JWT, OAuth, OpenID, HTML, CSS, Bootstrap, EJS.</p>
-  <p><strong>Deployment:</strong> Hosted on Render, offering a fully-responsive and secure authentication solution for your web apps.</p>
-  <p><a href="https://authwizard.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">AuthWizard Live</a></p>
-</div>
-
-      <!-- Obstacle-Avoiding Bot -->
-      <div class="project-item" data-aos="fade-up" data-aos-delay="300">
-        <h3>Obstacle-Avoiding Bot</h3>
-        <p>An autonomous robot designed to navigate environments by avoiding obstacles in its path.</p>
-        <p><strong>Key Features:</strong></p>
-        <ul>
-          <li>Real-Time Navigation: Uses ultrasonic sensors to detect and avoid obstacles.</li>
-          <li>Low-Latency Processing: Designed for fast decision-making and response.</li>
-          <li>Arduino-based Platform: Powered by Arduino and compatible with other IoT devices.</li>
-        </ul>
-        <p><strong>Technical Stack:</strong> Arduino, C/C++ programming, IoT sensors.</p>
-        <p><strong>Deployment:</strong> Built and tested in a controlled environment for real-world interaction.</p>
-      </div>
-      <!-- my-react-components -->
-<div class="project-item" data-aos="fade-up" data-aos-delay="300">
-  <h3>My React Components Library</h3>
-  <p>A collection of reusable, customizable, and responsive UI components built with React for seamless integration into various projects.</p>
-  <p><strong>Key Features:</strong></p>
-  <ul>
-    <li>Reusable Components: UI components designed to be easily reused across different projects.</li>
-    <li>Customizable: Easily configurable components to match your project’s design and functionality needs.</li>
-    <li>Responsive Design: Fully responsive and optimized for both desktop and mobile devices.</li>
-  </ul>
-  <p><strong>Technical Stack:</strong> React, JavaScript, CSS, and Material-UI for styling and components.</p>
-  <p><strong>Deployment:</strong> Hosted on Render for seamless integration and fast performance.</p>
-  <p><a href="https://myreactcomponents.onrender.com/" onclick="alert('Please note, this application might take a minute to load.');">MyReactComponents Live Demo</a></p>
-</div>
-    </div>
-
-     <!-- Fun Web Applications Section -->
-     <div class="project-item" data-aos="fade-up" data-aos-delay="400">
-        <h3>Fun Web Applications</h3>
-        <p>Various web applications demonstrating full-stack capabilities and creative use of APIs.</p>
-        
-        <div>
-          <h4>1. Travel Tracker</h4>
-          <p>Helps users count traveled destinations, with an intuitive UI for adding destinations viewed on a map.</p>
-          <p><strong>Tech Stack:</strong> React, Node.js, Express, PostgreSQL.</p>
-          <p><strong>Deployment:</strong> <a href="https://traveltracker-dfum.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">Travel Tracker Live Demo</a></p>
-        </div>
-  
-        <div>
-          <h4>2. Country Capital Game</h4>
-          <p>An educational game that tests user knowledge of world capitals.</p>
-          <p><strong>Tech Stack:</strong> JavaScript, HTML, CSS.</p>
-          <p><strong>Deployment:</strong> <a href="https://countrycapitalgame.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">Country Capital Game Live Demo</a></p>
-        </div>
-  
-        <div>
-          <h4>3. To-do List Application</h4>
-          <p>A simple and efficient task management tool for everyday use.</p>
-          <p><strong>Tech Stack:</strong> Node.js, Express, MongoDB.</p>
-          <p><strong>Deployment:</strong> <a href="https://todolist-9izk.onrender.com" onclick="alert('Please note, this application might take a minute to load.');">To-do List Live Demo</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h2 class="text-center">Contact Me</h2>
-      <div class="column text-center justify-content-center">
-          <a href="https://github.com/nskbobby" target="_blank" class="btn btn-outline-light m-2">
-            <!-- GitHub SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-              </svg>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- HeyDoc Project -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-stethoscope text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">HeyDoc</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">A comprehensive healthcare platform connecting patients with doctors, featuring appointment scheduling, medical records management, and telemedicine capabilities.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Next.js</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Healthcare</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Telemedicine</span>
+            </div>
+          </div>
+          
+          <a href="https://hey-doc-hvg3.vercel.app/" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
           </a>
+        </div>
+
+        <!-- Pet Dog Finder API -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-dog text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Pet Dog Finder API</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">An interactive API platform that allows users to search for dog breeds, view details, and see images.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">React.js</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">API</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Axios</span>
+            </div>
+          </div>
+          
+          <a href="https://pet-dog-finder.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+
+        <!-- Chariot API -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-server text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Chariot API</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">A single-integration API platform enabling efficient data aggregation and simplified access for businesses and developers.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">Node.js</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">PostgreSQL</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">AWS</span>
+            </div>
+          </div>
+          
+          <a href="https://api-project-chariot.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+
+        <!-- Friendly Blogger -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-blog text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Friendly Blogger</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">A lightweight blogging platform for creating, editing, and sharing posts in a secure, user-friendly environment.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Express</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">EJS</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Bootstrap</span>
+            </div>
+          </div>
+          
+          <a href="https://friendlyblogger.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+
+        <!-- AuthWizard -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-shield-alt text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">AuthWizard</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">A powerful and easy-to-integrate authentication solution for secure user management, including login, registration, and session handling.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">OAuth 2.0</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">JWT</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">OpenID</span>
+            </div>
+          </div>
+          
+          <a href="https://authwizard.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+
+        <!-- My React Components -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-4">
+              <i class="fab fa-react text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">React Components Library</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">A collection of reusable, customizable, and responsive UI components built with React for seamless integration.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">React</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Material-UI</span>
+              <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">Components</span>
+            </div>
+          </div>
+          
+          <a href="https://myreactcomponents.onrender.com/" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300">
+            View Live <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+
+        <!-- Obstacle-Avoiding Bot -->
+        <div class="glass-effect p-6 rounded-2xl card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-robot text-xl text-black"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Obstacle-Avoiding Bot</h3>
+          </div>
+          
+          <p class="text-text-gray mb-4">An autonomous robot designed to navigate environments by avoiding obstacles in its path using real-time sensor data.</p>
+          
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">Arduino</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">C++</span>
+              <span class="px-3 py-1 bg-accent-purple/20 text-accent-purple rounded-full text-sm">IoT</span>
+            </div>
+          </div>
+          
+          <span class="text-text-gray">Hardware Project</span>
+        </div>
+      </div>
+      
+      <!-- Fun Web Applications Section -->
+      <div class="mt-16">
+        <h3 class="text-2xl font-bold gradient-text font-space mb-8 text-center">Fun Web Applications</h3>
         
-          <a href="tel:+14149289428" class="btn btn-outline-light m-2">
-            <!-- Phone SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-              </svg>
-              </a>
-          <a href="mailto:krishnakola482@gmail.com" class="btn btn-outline-light m-2">
-            <!-- Gmail SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mailbox" viewBox="0 0 16 16">
-                <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3m0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4m2.646 1A4 4 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3z"/>
-                <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0"/>
-              </svg>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Travel Tracker -->
+          <div class="glass-effect p-6 rounded-2xl card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-3">
+                <i class="fas fa-map-marked-alt text-sm text-black"></i>
+              </div>
+              <h4 class="text-lg font-semibold text-white">Travel Tracker</h4>
+            </div>
+            
+            <p class="text-text-gray text-sm mb-4">Track your travel destinations with an intuitive map interface.</p>
+            
+            <div class="mb-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 bg-accent/20 text-accent rounded text-xs">React</span>
+                <span class="px-2 py-1 bg-accent/20 text-accent rounded text-xs">PostgreSQL</span>
+              </div>
+            </div>
+            
+            <a href="https://traveltracker-dfum.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300 text-sm">
+              View Demo <i class="fas fa-external-link-alt ml-1 text-xs"></i>
             </a>
+          </div>
+
+          <!-- Country Capital Game -->
+          <div class="glass-effect p-6 rounded-2xl card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 bg-gradient-to-br from-accent-purple to-accent rounded-lg flex items-center justify-center mr-3">
+                <i class="fas fa-globe text-sm text-black"></i>
+              </div>
+              <h4 class="text-lg font-semibold text-white">Country Capital Game</h4>
+            </div>
+            
+            <p class="text-text-gray text-sm mb-4">Test your knowledge of world capitals in this educational game.</p>
+            
+            <div class="mb-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-xs">JavaScript</span>
+                <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-xs">HTML/CSS</span>
+              </div>
+            </div>
+            
+            <a href="https://countrycapitalgame.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300 text-sm">
+              Play Game <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+            </a>
+          </div>
+
+          <!-- To-do List -->
+          <div class="glass-effect p-6 rounded-2xl card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center mr-3">
+                <i class="fas fa-tasks text-sm text-black"></i>
+              </div>
+              <h4 class="text-lg font-semibold text-white">To-Do List App</h4>
+            </div>
+            
+            <p class="text-text-gray text-sm mb-4">A simple and efficient task management tool for everyday use.</p>
+            
+            <div class="mb-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 bg-accent/20 text-accent rounded text-xs">Node.js</span>
+                <span class="px-2 py-1 bg-accent/20 text-accent rounded text-xs">MongoDB</span>
+              </div>
+            </div>
+            
+            <a href="https://todolist-9izk.onrender.com" target="_blank" class="inline-flex items-center text-accent hover:text-white transition-colors duration-300 text-sm">
+              Try App <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text font-space mb-4">Get In Touch</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto mb-8"></div>
+        <p class="text-xl text-text-gray max-w-2xl mx-auto">
+          Ready to bring your ideas to life? Let's collaborate and build something amazing together.
+        </p>
+      </div>
+      
+      <div class="flex justify-center space-x-8">
+        <a href="https://github.com/nskbobby" target="_blank" class="group glass-effect p-4 rounded-2xl card-hover">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center group-hover:animate-pulse">
+              <i class="fab fa-github text-xl text-black"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">GitHub</h3>
+              <p class="text-text-gray text-sm">View my repositories</p>
+            </div>
+          </div>
+        </a>
+        
+        <a href="tel:+14149289428" class="group glass-effect p-4 rounded-2xl card-hover">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent-purple to-accent rounded-lg flex items-center justify-center group-hover:animate-pulse">
+              <i class="fas fa-phone text-xl text-black"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">Phone</h3>
+              <p class="text-text-gray text-sm">**********</p>
+            </div>
+          </div>
+        </a>
+        
+        <a href="mailto:krishnakola482@gmail.com" class="group glass-effect p-4 rounded-2xl card-hover">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center group-hover:animate-pulse">
+              <i class="fas fa-envelope text-xl text-black"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">Email</h3>
+              <p class="text-text-gray text-sm">*****@gmail.com</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2024 Krishna K. | Portfolio</p>
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-text-gray">
+          &copy; 2025 Krishna K. All rights reserved.
+        </p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Bootstrap JS and AOS Animation JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init();
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+
+    // Add loading alerts for external links
+    document.querySelectorAll('a[href*="onrender.com"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        setTimeout(() => {
+          alert('Please note, this application might take a minute to load.');
+        }, 100);
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all project cards and sections
+    document.querySelectorAll('.card-hover, .glass-effect').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-opacity-95');
+      } else {
+        navbar.classList.remove('bg-opacity-95');
+      }
+    });
+
+    // Typing effect for hero subtitle
+    const subtitle = document.querySelector('.text-xl.md\\:text-2xl.text-text-gray');
+    const originalText = subtitle.textContent;
+    let i = 0;
+    
+    subtitle.textContent = '';
+    
+    function typeWriter() {
+      if (i < originalText.length) {
+        subtitle.textContent += originalText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+    
+    // Start typing effect after a delay
+    setTimeout(typeWriter, 1000);
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('section:first-of-type .absolute');
+      const speed = scrolled * 0.5;
+      
+      if (parallax) {
+        parallax.style.transform = `translateY(${speed}px)`;
+      }
+    });
   </script>
 </body>
 </html>
